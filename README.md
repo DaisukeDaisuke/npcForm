@@ -27,7 +27,7 @@ $chat->addButton("button3");
 $chat->addButton("button4");
 $chat->addButton("button5");
 
-$entity = npc::create($pos, $level, $chat);
+$entity = npc::create($pos, $level, $chat);//NPC Entity Spawn
 
 ```
 ## License
