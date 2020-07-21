@@ -2,21 +2,17 @@
 
 namespace npc;
 
-use pocketmine\Server;
-use pocketmine\Player;
-use pocketmine\event\Listener;
-
-use pocketmine\event\server\DataPacketReceiveEvent;
-use pocketmine\event\server\DataPacketSendEvent;
-
-use pocketmine\network\mcpe\protocol\NpcRequestPacket;
-
 use npc\entity\npc;
-use npc\chat\SimpleChat;
+use pocketmine\event\Listener;
+use pocketmine\event\server\DataPacketReceiveEvent;
+use pocketmine\network\mcpe\protocol\NpcRequestPacket;
+use pocketmine\Server;
 
 class EventListener implements Listener{
 	/** @var main */
 	public $plugin;
+	/** @var integer[] */
+	public $npc;
 
 	public function __construct(main $plugin){
 		$this->plugin = $plugin;
@@ -47,7 +43,7 @@ class EventListener implements Listener{
 
 				//npc form response
 				case NpcRequestPacket::REQUEST_EXECUTE_ACTION:
-					//「REQUEST_EXECUTE_CLOSING_COMMANDS」の受信を待ちます。
+					//Wait for the reception of "REQUEST_EXECUTE_CLOSING_COMMANDS".
 					$this->npc[$event->getPlayer()->getName()] = $packet->actionType;
 					break;
 				case NpcRequestPacket::REQUEST_EXECUTE_CLOSING_COMMANDS:
@@ -58,9 +54,7 @@ class EventListener implements Listener{
 					$entity->handleResponse($player, $response);
 					break;
 			}
-			
 		}
 	}
-
-	
 }
+

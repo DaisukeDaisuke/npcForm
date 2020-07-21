@@ -5,33 +5,33 @@ namespace npc\chat;
 use pocketmine\Player;
 
 class BaseChat{
-	public $content = "";
+	public $contents = "";
 	public $title = "";
 	public $buttons = [];
 
 	public function __construct(){
-		
+
 	}
 
-	public function setTitle(String $title){
+	public function setTitle(string $title){
 		$this->title = $title;
 	}
 
-	public function getTitle(): String{
+	public function getTitle(): string{
 		return $this->title;
 
 	}
 
-	public function setContents(String $contents){
+	public function setContents(string $contents){
 		$this->contents = $contents;
 	}
 
-	public function getContents(): String{
+	public function getContents(): string{
 		return $this->contents;
 	}
 
 
-	public function addButton(String $label){
+	public function addButton(string $label){
 		$this->buttons[] = [
 			"button_name" => $label,
 			"data" => null,
@@ -45,11 +45,11 @@ class BaseChat{
 		return $this->buttons;
 	}
 
-	public function getActionJson(): String{
+	public function getActionJson(): string{
 		return json_encode($this->buttons, JSON_UNESCAPED_UNICODE);
 	}
 
 	public function handleResponse(Player $player, ?int $response){
-		
+
 	}
 }

@@ -6,6 +6,7 @@ use pocketmine\Player;
 
 class SimpleChat extends BaseChat{
 	//@see BaseChat
+	/** @var ?callable */
 	public $callable = null;
 
 	public function __construct(?callable $callable = null){
@@ -25,4 +26,5 @@ class SimpleChat extends BaseChat{
 		if(isset($this->callable)){
 			($this->callable)($player, $response);
 		}
-	}}
+	}
+}

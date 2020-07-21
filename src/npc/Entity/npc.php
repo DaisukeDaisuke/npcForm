@@ -21,30 +21,14 @@
 
 namespace npc\entity;
 
-use pocketmine\Player;
+use pocketmine\entity\Entity;
 use pocketmine\level\Level;
 use pocketmine\level\Position;
-use pocketmine\entity\Entity;
-
 use pocketmine\math\Vector3;
-
 use pocketmine\nbt\tag\CompoundTag;
-
-use pocketmine\network\mcpe\protocol\AddActorPacket;
-use pocketmine\network\mcpe\protocol\NpcRequestPacket;
-use pocketmine\network\mcpe\protocol\AddPlayerPacket;
-use pocketmine\network\mcpe\protocol\PlayerSkinPacket;
-use pocketmine\network\mcpe\protocol\RemoveEntityPacket;
-use pocketmine\utils\UUID;
-use pocketmine\network\mcpe\protocol\MovePlayerPacket;
-use pocketmine\network\mcpe\protocol\PlayerListPacket;
-use pocketmine\network\mcpe\protocol\types\PlayerListEntry;
-use pocketmine\network\mcpe\protocol\types\SkinAdapterSingleton;
-use pocketmine\entity\Skin;
-use pocketmine\item\Item;
+use pocketmine\Player;
 
 class npc extends Entity{
-	//public const NETWORK_ID = 33;
 	public const NETWORK_ID = 51;
 
 	public $width = 0.6;
@@ -54,13 +38,13 @@ class npc extends Entity{
 
 	public $chat = null;
 
-	public function __construct(Level $level, CompoundTag $nbt,$chat = null){//?BaseChat
+	public function __construct(Level $level, CompoundTag $nbt, $chat = null){//?BaseChat
 		parent::__construct($level, $nbt);
-		$this->setCanSaveWithChunk(false);//PocketMine-MP側の保存を無効化...
+		$this->setCanSaveWithChunk(false);//Disable save on PocketMine-MP side...
 		$this->setChat($chat);
 	}
 
-	protected function initEntity() : void{
+	protected function initEntity(): void{
 		parent::initEntity();
 
 		//$this->propertyManager->setString(self::DATA_NPC_SKIN_INDEX, $this->player->getSkin()->getSkinId());
@@ -68,7 +52,7 @@ class npc extends Entity{
 		$this->setChatEnable(true);
 	}
 
-	public function setChatEnable(bool $enable){;
+	public function setChatEnable(bool $enable){
 		$this->propertyManager->setByte(self::DATA_HAS_NPC_COMPONENT, (int) $enable);
 	}
 
@@ -76,11 +60,11 @@ class npc extends Entity{
 		return (bool) ($this->propertyManager->getByte(self::DATA_HAS_NPC_COMPONENT));
 	}
 
-	public function setText(String $text){
+	public function setText(string $text){
 		$this->propertyManager->setString(self::DATA_INTERACTIVE_TAG, $text);
 	}
 
-	public function getText(): String{
+	public function getText(): string{
 		return $this->propertyManager->getString(self::DATA_INTERACTIVE_TAG);
 	}
 
@@ -97,29 +81,29 @@ class npc extends Entity{
 		return $this->chat;
 	}
 
-	public function setActionJson(String $json){//
+	public function setActionJson(string $json){//
 		$this->propertyManager->setString(self::DATA_NPC_ACTIONS, $json);
 	}
 
-	public function getActionJson(): String{//
+	public function getActionJson(): string{//
 		return $this->propertyManager->getString(self::DATA_NPC_ACTIONS);
 	}
 
-	public function getName() : string{
+	public function getName(): string{
 		return "NPC";
 	}
 
-	protected function sendSpawnPacket(Player $player) : void{
+	protected function sendSpawnPacket(Player $player): void{
 		parent::sendSpawnPacket($player);
 	}
 
-	public static function create(Vector3 $pos,?Level $level = null,$chat,bool $spawnAll = true): self{//BaseChat $chat
+	public static function create(Vector3 $pos, ?Level $level = null, $chat, bool $spawnAll = true): self{//BaseChat $chat
 		if($pos instanceof Position){
 			$level = $pos->getLevel();
 		}
 		$nbt = self::createBaseNBT($pos, null, lcg_value() * 360, 0);
 
-		$entity = new static($level, $nbt,$chat);
+		$entity = new static($level, $nbt, $chat);
 
 		if($spawnAll){
 			$entity->spawnToAll();
