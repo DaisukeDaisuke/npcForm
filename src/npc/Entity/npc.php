@@ -22,6 +22,7 @@
 namespace npc\entity;
 
 use pocketmine\entity\Entity;
+use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\level\Level;
 use pocketmine\level\Position;
 use pocketmine\math\Vector3;
@@ -116,6 +117,12 @@ class npc extends Entity{
 		$chat = $this->getChat();
 		if($chat !== null){
 			$chat->handleResponse($player, $response);
+		}
+	}
+
+	public function attack(EntityDamageEvent $source): void{
+		if($source->getCause() === EntityDamageEvent::CAUSE_VOID){
+			parent::attack($source);
 		}
 	}
 }
