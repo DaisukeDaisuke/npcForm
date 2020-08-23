@@ -14,6 +14,10 @@ use npc\chat\SimpleChat;
 //$pos = $player->asVector3();
 
 $chat = new SimpleChat(function(Player $player, ?int $response){
+	if($response === null){
+		$player->sendMessage("canceled");
+		return;
+	}
 	$player->sendMessage((String) $response);
 });
 
