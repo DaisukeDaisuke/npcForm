@@ -1,4 +1,11 @@
 # npcForm
+## This plugin has not been developed.
+We recommend that you use the following plugins instead.  
+### NpcDialog
+https://github.com/andresbytes/NpcDialog  
+### NpcForm 
+https://github.com/ScarceityPvP/NpcForm   
+  
 ![_20200702_112544](https://user-images.githubusercontent.com/17798680/86310215-712add80-bc58-11ea-983e-1cdf37fd1e2b.JPG)
 ## example
 
