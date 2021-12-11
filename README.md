@@ -1,7 +1,7 @@
 # npcForm
 ## This plugin has not been developed.
 We recommend that you use the following plugins instead.  
-### libNpcDialogue (1.18+, library)
+### libNpcDialogue (library, bedrock 1.18+)
 https://github.com/refteams/libNpcDialogue
 #### NpcDialog
 https://github.com/andresbytes/NpcDialog  
